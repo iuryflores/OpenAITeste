@@ -29,8 +29,8 @@ export default async function (req, res) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(animal),
-      temperature: 0.9,
-      max_tokens: 500,
+      temperature: 0.6,
+      max_tokens: 100,
     });
 
     console.log(completion.data.choices[0].text)
@@ -54,14 +54,10 @@ export default async function (req, res) {
 function generatePrompt(animal) {
   const capitalizedAnimal =
     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return ` Orientação para registro de imoveis do cartorio de goias.
-           Só responda as questões que envolva legislação de goiás.
-           Caso seja informado uma pergunta com um tema diferente, responda não tenho essas informações.
-           Sempre gerar texto resumido com 50 caracteris.
-           Sempre no final do texto coloque o Atenciosamente Cartório.
+  return `Caso seja informado uma pergunta com uma pergunta diferente, responda não tenho essas informações.
+           Sempre gerar uma resposta com 550 caracteres.
+           Sempre no final do texto coloque o Atenciosamente 1 Registro de Imoveis de Goiania.
            Abaixo são as perguntas e respostas para responder os clientes do cartório.
-            Pergunta Cliente: Quais os tipos de atos se pratica em um registro de imovel.
-            Reposta Cartorio: compra e venda ,alienação fiduciaria, casamento.
             O casamento estabelece a comunhão plena de vida, com base na igualdade de direitos e deveres dos cônjuges. Pelos princípios da continuidade registral e da especialidade subjetiva, todas as alterações de estado civil deverão ser averbadas na matrícula.
             Previsão Legal – artigos 1.511 e ss. e 1.653 e ss. do Código Civil; artigos 167, 176, 217, 225, 244, 246 e ss. da Lei n. 6.015/1973.
             Documentos necessários:
